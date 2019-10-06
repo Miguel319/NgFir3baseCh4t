@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { ChatComponent } from './componentes/chat/chat.component';
-
+import { ChatService } from './servicios/chat.service';
 
 @NgModule({
   declarations: [AppComponent, ChatComponent],
@@ -22,7 +22,7 @@ import { ChatComponent } from './componentes/chat/chat.component';
     AngularFireAuthModule, 
     FormsModule
   ],
-  providers: [],
+  providers: [ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
