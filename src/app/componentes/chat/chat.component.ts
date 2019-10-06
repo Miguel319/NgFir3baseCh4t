@@ -10,6 +10,7 @@ import { Mensaje } from "src/app/modelos/mensaje.interface";
 export class ChatComponent implements OnInit {
   mensaje: string;
   mensajes: Mensaje[];
+  elem: any;
 
   constructor(public chatService: ChatService) {}
 
@@ -17,10 +18,16 @@ export class ChatComponent implements OnInit {
     this.mensajes = this.chatService.chats;
     this.mensaje = "";
     this.cargarDatos();
+
+    this.elem = document.getElementById("app-mensajes");
   }
 
   cargarDatos() {
-    this.chatService.cargarMensajes().subscribe();
+    this.chatService
+      .cargarMensajes()
+      .subscribe(() =>
+        setTimeout(() => (this.elem.scrollTop = this.elem.scrollHeight), 10)
+      );
   }
 
   enviarMensaje() {
@@ -29,8 +36,6 @@ export class ChatComponent implements OnInit {
     this.chatService
       .agregarMensaje(this.mensaje)
       .then(() => (this.mensaje = ""))
-      .catch(err => console.log("¡Error al enviar", err));
-
-    ;
+      .catch(err => console.log("Error al enviar ", err + "!"));
   }
 }
