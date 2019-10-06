@@ -6,7 +6,7 @@ import { auth } from "firebase/app";
   providedIn: "root"
 })
 export class AuthService {
-  usuario: any = {};
+ usuario: any = {};
 
   constructor(public afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe(user => {
@@ -23,6 +23,7 @@ export class AuthService {
   }
 
   cerrarSesion() {
+    this.usuario = {};
     this.afAuth.auth.signOut();
   }
 }

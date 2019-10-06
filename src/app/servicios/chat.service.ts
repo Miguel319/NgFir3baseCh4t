@@ -1,14 +1,14 @@
 import { Injectable } from "@angular/core";
 import { map, filter } from "rxjs/operators";
+import { AuthService } from './auth.service'
 
-import { AngularFireAuth } from "@angular/fire/auth";
-import { auth } from "firebase/app";
 
 import {
   AngularFirestore,
   AngularFirestoreCollection
 } from "@angular/fire/firestore";
 import { Mensaje } from "../modelos/mensaje.interface";
+import { auth } from 'firebase';
 
 @Injectable({
   providedIn: "root"
@@ -17,7 +17,7 @@ export class ChatService {
   chats: Mensaje[] = [];
   private itemsCollection: AngularFirestoreCollection<Mensaje>;
 
-  constructor(private afs: AngularFirestore) {
+  constructor(private afs: AngularFirestore, private authService: AuthService) {
     
   }
 
@@ -42,9 +42,10 @@ export class ChatService {
 
   agregarMensaje(text: string) {
     let mensaje: Mensaje = {
-      nombre: "John",
+      nombre: this.authService.usuario.nombre,
       mensaje: text,
-      fecha: new Date().getTime()
+      fecha: new Date().getTime(),
+      uid: this.authService.usuario.uid
     };
 
     return this.itemsCollection.add(mensaje);

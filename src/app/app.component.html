@@ -1,7 +1,13 @@
 <h1 class="mb-4">Firebase chat</h1>
 
-<app-inicio-sesion></app-inicio-sesion>
+<div class="col-md-12 text-right" *ngIf="authService.usuario.uid">
+  <button class="btn btn-outline-danger">
+    Salir
+  </button>
+</div>
 
-<div class="chat-window">
+<app-inicio-sesion *ngIf="!authService.usuario.uid"></app-inicio-sesion>
+
+<div *ngIf="!authService.usuario.uid" class="chat-window">
   <app-chat></app-chat>
 </div>

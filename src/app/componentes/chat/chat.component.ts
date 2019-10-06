@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ChatService } from "src/app/servicios/chat.service";
 import { Mensaje } from "src/app/modelos/mensaje.interface";
+import { AuthService } from "src/app/servicios/auth.service";
 
 @Component({
   selector: "app-chat",
@@ -12,7 +13,10 @@ export class ChatComponent implements OnInit {
   mensajes: Mensaje[];
   elem: any;
 
-  constructor(public chatService: ChatService) {}
+  constructor(
+    public chatService: ChatService,
+    public authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.mensajes = this.chatService.chats;

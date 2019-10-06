@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
-import { Observable } from "rxjs";
+import { AuthService } from "./servicios/auth.service";
 
 @Component({
   selector: "app-root",
@@ -8,12 +8,7 @@ import { Observable } from "rxjs";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
-  chats: Observable<any[]>;
-  constructor(private db: AngularFirestore) {}
+  constructor(public authService: AuthService) {}
 
-  ngOnInit() {
-    this.chats = this.db.collection("chats").valueChanges();
-  }
-
-  title = "fire-chat";
+  ngOnInit() {}
 }

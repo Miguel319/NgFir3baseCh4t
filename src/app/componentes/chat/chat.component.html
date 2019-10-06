@@ -2,23 +2,18 @@
 <hr />
 
 <div class="app-mensajes" id="app-mensajes">
-  <div class="text-right" *ngFor="let mensaje of chatService.chats">
-    <span class="badge badge-primary">Co0l</span>
+  <div
+    [ngClass]="{ 'text-right': authService.usuario.uid === chat.uid }"
+    class="text-right"
+    *ngFor="let mensaje of chatService.chats"
+  >
+    <span class="badge"
+    [ngClass]="{ 'badge-primary': authService.usuario.uid === chat.uid, 
+    'badge-success':  authService.usuario.uid !== chat.uid
+  }"
+    >{{authService.usuario.nombre}}</span>
     <p>{{ mensaje.mensaje }}</p>
   </div>
-  <!--
-     <div class="text-right">
-    <span class="badge badge-primary">Co0l</span>
-    <p>Mensaje de chat</p>
-  </div>
-  <div>
-    <span class="badge badge-success">Even Co0ler</span>
-    <p>Mensaje de "Even Co0ler"</p>
-  </div>
-  <div>
-    <span class="badge badge-success">Even Co0ler</span>
-    <p>Mensaje de "Even Co0ler"</p>
-  </div> -->
 </div>
 
 <input
